@@ -1,0 +1,111 @@
+//1、实现一个函数，打印乘法口诀表，口诀表的行数和列数自己指定， 
+//输入9，输出9*9口诀表，输出12，输出12*12的乘法口诀表
+//#include <stdio.h>
+//void multiplication(int n)
+//{
+//	int i=0;
+//	int j=0;
+//	for ( i = 0; i <= n ; i++)
+//	{
+//		for ( j = 0; j <= i ;j++)
+//		{
+//			printf("%d*%d=%-2d",i,j,i*j);//%2d的2表示输出两格 右对齐  %-2d表示数左对齐  
+//		}
+//		printf("\n ");
+//	}
+//}
+//int main()
+//{
+//	int n=0;
+//	printf("请输入要打印的行数\n");
+//	scanf("%d",&n);
+//	multiplication(n);
+//return 0;
+//}
+//2、使用函数实现两个数的交换
+//#include<stdio.h>
+//void Swap (int *px ,int *py)
+//{
+//	int tmp = 0;
+//	tmp = *px;
+//	*px = *py;
+//	*py = tmp;
+//}
+//int main()
+//{
+//	int a=0;
+//	int b=0;
+//	printf("请输入两个整数a= b= \n");
+//	scanf("%d %d",&a,&b);
+//	Swap(&a,&b);
+//	printf("a=%d \nb=%d",a,b);
+//	return 0;
+//}
+//3、用函数判断是否为闰年
+//#include <stdio.h>
+//int leap_year(int year)
+//{
+//	if ((year %4 == 0 && year/100 != 0) || (year % 400 == 0)) 
+//	{
+//		return 1;
+//	}
+//	else 
+//	{
+//		return 0;
+//	}
+//}
+//int main()
+//{
+//	int year = 0 ;
+//	int ret = 0;
+//	printf("请输入年份\n");
+//	scanf("%d",&year);
+//	ret = leap_year(year);
+//	if (ret == 1)
+//	{
+//		printf("是闰年\n");
+//	}
+//	else 
+//	{
+//		printf("不是闰年\n");
+//	}
+//	return 0;
+//}
+//4、用函数判断素数
+//#include <stdio.h>
+//#include <math.h>
+//int is_prime(int n)
+//{
+//	int i = 0;
+//	for ( i = 2; i <= sqrt(n) ;i++)
+//	{
+//		if (n % i == 0)
+//		{
+//			return 0;
+//		}
+//		else 
+//		{
+//			return 1;
+//		}
+//	}
+//}
+//int main()
+//{
+//	int j=0;
+//	printf("请输入一个整数\n");
+//	scanf("%d",&j);
+//	if (is_prime(j))
+//	{
+//		printf("这个数是素数\n");
+//	}
+//	else
+//	{
+//		printf("这个数不是素数\n");
+//	}
+//	return 0;
+//}
+//5. 创建一个数组， 
+//实现函数init（）初始化数组、 
+//实现empty（）清空数组、 
+//实现reverse（）函数完成数组元素的逆置。 
+//要求：自己设计函数的参数，返回值。 
