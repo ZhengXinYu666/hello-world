@@ -1,0 +1,336 @@
+//一、用归和非递归分别实现求第n个斐波那契数
+//首先明白何为斐波那契数
+//F0=0，F1=1，Fn=Fn-1+Fn-2 （n>=2，n∈N*）
+//用文字来说，就是斐波那契数列由 0 和 1 开始，之后的斐波那契数列系数就由之前的两数相加。
+//1,1，2，3，5，8，13，21，34，55，89，144……
+//1、递归方法
+//#include <stdio.h>
+//int Fib(int n)
+//{
+//	if( n <= 2 )
+//	{
+//		return 1;
+//	}
+//	else 
+//	{
+//		return Fib( n - 1 )+Fib( n - 2 );
+//	}
+//}
+//int main()
+//{
+//	int n = 0;
+//	int ret = 0;
+//	printf("请输入n的值\n",n);
+//	scanf("%d", &n );
+//	ret = Fib(n);
+//	printf("%d",ret);
+//	return 0;
+//}
+//2、非递归方法
+//斐波那伽数列的最合适解法不一定为递归的方式，因为递归调用过程中有很多重复的计算
+//而且重复的数量随着n的增加而增加，实际上斐波那伽时间复杂度事宜n的指数级的方式递增，如果要计算第100个就需要等很藏时间了
+//#include<stdio.h>
+//int Fib(int n)
+//{
+//	int a=1;
+//	int b=1;
+//	int c=0;
+//	while ( n > 2 )
+//	{
+//		c = a + b;
+//		a = b;
+//		b = c;
+//		n--;
+//	}	
+//	return b;
+//}
+//int main()
+//{
+//    int n = 0;
+//    int ret = 0;
+//	scanf("%d",&n);
+//    ret = Fib(n);
+//    printf("%d",ret);
+//return 0;
+//}
+
+
+
+
+
+
+
+
+//二、编写一个函数实现n^k，使用递归实现
+//首先 我们来  理性的（夏基霸）分析一波
+//n的k次方那不就是n*n*n*n*n*n*....*n（共k个）
+//有同学会问
+//那么这个时候我们该怎么做？
+//问得好
+//我也不知道
+//我们试验一下 
+//猜想  各种骚操作从脑中划过
+//变个型 变成n*n^k-1 怎么样
+//我也不知道为什么要变成这个样子
+//反正感觉好像离求解正确不远了
+//附加一个递归使用的三要素
+//（1）条件限制
+//用if条件进行限制，在某一状态下进行递归调用自身
+//（2）条件逼近
+//通过一步步的递归调用，应该向if判断条件的方向逼近
+//以停止递归（找到递归的终点）
+//（3）将大化小
+//每次递归的都要将一个大的问题划分成子问题
+//思考了这么多  是时候了
+//naroto  一克嗖！
+//1、递归法
+//#include <stdio.h>
+//#include <math.h>
+//int  my_pow(int n,int k)
+//{
+//	if (k == 0)
+//	{
+//		return 1;
+//	}
+//	if (k == 1)
+//	{
+//		return n;
+//	}
+//	return my_pow(n , k - 1)*n;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int k = 0;
+//	printf("请输入n和k\n");
+//	scanf("%d%d",&n,&k);
+//	printf("%d\n",my_pow(n,k));
+//return 0;
+//}
+//2、迭代法
+//数据量较大的时候比递归速度快
+//#include <stdio.h>
+//#include <math.h>
+//int my_ine(int n,int k)//迭代
+//{
+//	int q = n;
+//	int p = k - 1;
+//	if ( k == 0 )
+//	{
+//		return 1;
+//	}
+//	while ( p-- )
+//	{
+//		n = n * q;
+//	}
+//	return n;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int k = 0;
+//	printf("请输入n和k\n");
+//	scanf("%d%d",&n,&k);
+//	printf("%d\n",my_ine(n,k));
+//return 0;
+//}
+
+
+
+
+
+
+
+
+//三、写一个递归函数DigitSum(n)，输入一个非负整数，返回组成它的数字之和
+//例如，调用DigitSum(1729)，则应该返回1+7+2+9，它的和是19
+//理性分析一波
+//非负整数  返回组成它的数字之和
+//
+//#include <stdio.h>
+//#include <math.h>
+//int DigitSum(int n)
+//{
+//	int ret = 0;
+//	while (n)
+//	{
+//		ret = ret + n % 10;
+//		n = n / 10;
+//	}
+//	return ret;
+//}
+//int main()
+//{
+//	int n = 0;
+//	printf("请输入n:\n");
+//	scanf("%d",&n);
+//    printf("%d\n",DigitSum(n));
+//    return 0;
+//}
+
+
+
+
+//四、编写一个函数reverse_string(char * string)（递归实现）
+//实现：将参数字符串中的字符反向排列。
+//要求：不能使用C函数库中的字符串操作函数
+//#include <stdio.h>
+//#include <assert.h>
+//void reverse_string(char const * string)
+//{
+//	assert(string != NULL);
+//	if (*string != '/0')
+//	{
+//		string ++;
+//		reverse_string(string);
+//		printf("%c",*(string - 1));
+//	}
+//}
+//int main()
+//{
+//	char *string="zhengxinyu666";
+//	printf("原字符串为    %s\n反向排列后为：",string);
+//	reverse_string(string);
+//	printf("\n");
+//	return 0;
+//}
+
+
+
+
+
+//五、递归和非递归分别实现strlen 
+//首先明白strlen的功能
+//这是一个求字符串长度的函数
+//只能用char*做参数(字符型指针)，且必须是以'\0'结尾的
+//
+//#include<stdio.h>
+//int my_strlen0(const char *arr)//计数方式
+//{
+//	int count = 0;
+//	while (*arr)
+//	{
+//		arr++;
+//		count++;
+//	}
+//	return count;
+//}
+//int my_strlen1(char *arr)//指针方式
+//{
+//	char *p = arr;//将数组首元素地址给指针p
+//	while (*p != '\0')
+//	{
+//		p++;           //指针最后指向arr中最后一个元素
+//	}
+//	return p - arr;//返回数组元素个数
+//}
+//int my_strlen2(char *arr)//递归方式
+//{
+//	if ( '\0' == *arr)
+//	{
+//		return 0;
+//	}
+//	else 
+//	{
+//		return 1+my_strlen2(arr+1);//调用自己 传arr+1
+//	}
+//}
+//int main()
+//{
+//	char arr[] = "abcdefg";
+//	my_strlen0(arr);
+//	my_strlen1(arr);
+//	my_strlen2(arr);
+//	printf("%d\n",my_strlen0(arr));
+//	printf("%d\n",my_strlen1(arr));
+//	printf("%d\n",my_strlen2(arr));
+//	return 0;
+//}
+//
+
+
+//六、递归和非递归求n的阶乘
+//#include <stdio.h>
+//int sum1(n)//循环法求阶乘
+//{
+//	int sum = 1;
+//	int i = 1;
+//	for (i = 1; i <= n; i++)
+//	{
+//		sum = sum * i;
+//	}
+//	return sum;
+//}
+//int sum2(n)
+//{
+//	int sum = 0;
+//	if (n == 1)
+//	{
+//		sum = 1;
+//	}
+//	else 
+//	{
+//		sum = sum2(n - 1) * n;
+//	}
+//	return sum;
+//}
+//
+//void Menu() {
+//	printf("1   用循环法求阶乘\n");
+//	printf("2   用递归法求阶乘\n");
+//	printf("3   退出\n");
+//}
+//int  main()
+//{
+//	int sum = 1;
+//	int n,c;
+//	printf("输入要求的阶乘 n ：");
+//	scanf("%d", &n);
+//	Menu();
+//	while (1) 
+//	{
+//		printf("\n输入菜单: ");
+//		scanf("%d", &c);
+//		switch (c) 
+//		{
+//		case 1:
+//			sum = sum1(n);
+//			printf("sum1 = %d", sum);
+//			break;
+//		case 2:
+//			sum = sum2(n);
+//			printf("sum2 = %d", sum);
+//			break;
+//		case 3:
+//			break;
+//		default:
+//			break;
+//		}
+//		if (c == 3) 
+//			break;
+//	}
+//	return 0;
+//}
+
+//七、递归方式实现打印一个整数的每一位
+//#include <stdio.h>
+//void print_num(int n)
+//{
+//	if (n != 0)
+//	{
+//		if (n<0)
+//		{
+//			n = -n;
+//		}
+//		printf(" %d \n", n % 10);
+//		print_num(n / 10);
+//	}
+//}
+//int main()
+//{
+//	int n;
+//	printf("请输入一个整数：\n");
+//	scanf("%d", &n);
+//	print_num(n);
+//	return 0;
+//}
