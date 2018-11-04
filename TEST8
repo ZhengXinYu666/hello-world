@@ -1,0 +1,211 @@
+/* 
+
+* Copyright (c) 2018, 西安工业大学计算机学院 
+
+* All rights reserved. 
+
+* 作 者： 郑辛宇 
+
+* 完成日期：2018年10月24日 
+
+* 版 本 号：v1.0 
+
+* 输入描述:代码练习题
+
+* 问题描述：如注释
+
+* 程序输出：
+
+* 问题分析： 
+
+* 算法设计：
+
+*/ 
+////1、有一个字符数组的内容为:"student a am i"
+////将数组的内容改为"i am a student". 
+////要求：
+////不能使用库函数。
+////只能开辟有限个空间（空间个数和字符串的长度无关）。
+//#include <stdio.h>
+//#include <string.h>
+//
+//void reverse_all(char * star, char * end)//逆置函数，给定一个区间，逆置区间里面的字符
+//{
+//	while (star < end)
+//	{
+//		*star = *star ^ *end;
+//		*end = *star ^ *end;
+//		*star = *star ^ *end;
+//		star ++;
+//		end --;
+//	}
+//}
+//
+//int main()
+//{
+//	char msg[]="student a am i";
+//	char *p = msg;//刚开始指针p q都指向字符串的首地址
+//	char *q = p;
+//	reverse_all(msg, msg + strlen(msg) - 1);//整体逆置
+//	while (*p != '/0' && *q != '/0')
+//	{
+//		if (*q == ' ')//以每个单词为对象 局部逆置
+//		{	
+//			reverse_all(q,p-1);//q指向空格说明一个单词凑够 q-1为尾部逆置
+//			q ++;//q指向下一个单词开头
+//			p = q;//p也指向下一个单词开头
+//		}	
+//		q ++;//q继续往后移动 直到遇到下一个空格说明凑够一个单词 开始逆置
+//	}
+//	reverse_all(p, q-1);//最后一次指针指向/0导致退出循环 为最后一个单词再逆置一次
+//	printf("%s\n",msg);
+//	return 0;//有问题 运行会挂掉 讲道理 代码应该是没问题的换一种方法写
+//}
+
+//#include <stdio.h>
+//#include <assert.h>
+// 
+//void reverse_str(char *left, char *right)
+//{
+//	assert(left);
+//	assert(right);
+//	while (left < right)
+//	{
+//		char tmp = 0;
+//		tmp = *left;
+//		*left = *right;
+//		*right = tmp;
+//		left ++;
+//		right --;
+//	}
+//}
+// 
+//int my_strlen(const char * str)
+//{
+//	int count = 0;
+//	while (*str++)
+//	{
+//		count++;
+//	}
+//	return count;
+//}
+// 
+//void reverse(char arr[])//(cahr *str)
+//{
+//	char *pstart = arr;
+//	char *pend = arr + my_strlen(arr) - 1;
+//	char *pcur = NULL;
+//	if ((arr == NULL) || (arr[0] == '\0'))
+//	{
+//		return;
+//	}
+//	reverse_str(pstart, pend);//逆序整个字符数组
+// 
+//	while (*arr)
+//	{
+//		pcur = arr;
+//		while (*arr != '\0' && *arr != ' ')
+//		{
+//			arr++;
+//		}
+//		pend = arr - 1;
+//		reverse_str(pcur, pend);
+//		if (*arr == ' ')
+//			arr++;
+//	}
+//}
+// 
+//int main()
+//{
+//	char arr[] = "student a am i";
+//	reverse(arr);
+//	printf("%s\n", arr);
+//	return 0;
+//}
+//2、不使用（a+b）/2这种方式，求两个数的平均值
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	printf("请输入两个正整数a b （要求a>b)\n");
+//	scanf_s("%d%d",&a, &b);
+//	printf("\n");
+//	//printf("%d\n",((a+(a-b)) >> 1);不知道错在哪里了 总是提示错误c2143
+//	printf("%d\n",((a+b) >> 1));
+//	printf("%d\n",(a+(a-b)/2));
+//	printf("%d\n",((a&b)+(a^b))>> 1);//最优
+//	return 0;
+//}
+//3、编程实现：一组数据中只有一个数字出现了一次
+//其他所有数字都是成对出现的
+//请找出这个数字（使用位运算）
+//#include <stdio.h>
+//int main()
+//{
+//	int arr[] = { 1,3,3,1,4,6,4,5,5};
+//	int i = 0;
+//	int len = sizeof(arr)/sizeof(arr[0]);
+//	//为了找出单独的数
+//	//取异或运算
+//	//如arr[1]={1,3,3,1,4}
+//	//01^11 = 10;
+//	//用这个结果10^11=01   01^01 = 00
+//	//000^100 = 100 = 4 
+//	//单独的数的结果就为1
+//	//1、a=a^b c^a=c^(a^b)
+//	//2、自己异或自己两次还是自己 
+//	for ( i = 1; i < len; i++)
+//	{
+//		arr[0] = arr[0] ^ arr[i];
+//	}
+//	printf("单独的数是%d\n",arr[0]);
+//	return 0;
+//}
+//4、编写函数 unsigned int reverse_bit(unsigned int value); 
+//这个函数的返回值value的二进制位模式从左到右翻转后的值。
+//如在32位机器上25这个值包含下列各位：
+//00000000000000000000000000011001
+//翻转后：（2550136832）
+//10011000000000000000000000000000
+//#include <stdio.h>
+//#include <math.h>
+//unsigned int reverse_bit(unsigned int value)
+//{
+//	int ret = 0;
+//	int bit = 0;
+//	int i = 0;
+//	for (i = 0; i < 32; i ++)
+//	{
+//		ret = ret << 1;//左移一位 保存前一位
+//		bit = value & 1;//取出最后一位
+//		value = value >> 1;//值右移 取下一位
+//		ret = bit | ret;//最后一位赋给ret
+//	}
+//	return ret;
+//}
+//int main() 
+//{ 
+//	printf("%u\n",reverse_bit(25)); 
+//	return 0; 
+//}
+//#include<stdio.h>
+//unsigned int reverse_bit(unsigned int value)
+//{
+//    unsigned int sum = 0;
+//    int i = 0;
+//    for (i = 0; i < 32; i++)
+//    {
+//        sum += ((value >> i) & 1) << (31 - i);//取出最低位，左移到相应位置
+//    }
+//    return sum;
+// 
+//}
+// 
+//int main()
+//{
+//    unsigned int num = 25;
+//    printf("反转后：%u\n", reverse_bit(num)); 
+//    return 0;
+//}
+
