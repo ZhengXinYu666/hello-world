@@ -1,0 +1,60 @@
+game.h
+#define __GAME_H__
+
+#include<stdio.h>
+#include<time.h>
+#include<stdlib.h>
+
+#define ROW 3
+#define COL 3
+
+enum OPTION
+{
+    EXIT,
+    PLAY
+};
+
+void Init_TableBoard(char TableBoard[ROW][COL], int row, int col);
+void Meau();
+void game(char TableBoard[ROW][COL], int row, int col);
+void Tableboard_Display(char TableBoard[ROW][COL], int row, int col);
+void PlayerMove(char TableBoard[ROW][COL], int row, int col);
+int Is_Win(char TableBoard[ROW][COL], int row, int col);
+int Is_full(char TableBoard[ROW][COL], int row, int col);
+void ComputerMove(char TableBoard[ROW][COL], int row, int col);
+void Reverse_TableBoard(char TableBoard[ROW][COL], int row, int col);
+
+#endif // !__GAME_H__
+
+test.c
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include"game.h"
+
+int main()
+{
+	 int ret1 = 0;// 接收判断谁赢函数的返回值 1-表示玩家赢 0-表示电脑赢 -1—表示尚未分出胜负
+    int ret2 = 0;// 接收判断棋盘满没满函数的返回值 0-表示没满 1-表示满了（平局）
+    char TableBoard[ROW][COL] = { 0 };
+    int input = 0;
+    Init_TableBoard(TableBoard, ROW, COL);
+    do
+    {
+        Meau();
+        printf("请选择：");
+        scanf("%d", &input);
+        switch (input)
+        {
+        case EXIT:
+            break;
+        case PLAY:
+            game(TableBoard, ROW, COL);
+            break;
+        default:
+            printf("选择非法，请重新选择\n");
+            Reverse_TableBoard(TableBoard, ROW, COL);
+        }
+    } while (input);
+    return 0;
+}
