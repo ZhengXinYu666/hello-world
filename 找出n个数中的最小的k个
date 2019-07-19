@@ -1,0 +1,23 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int num = sc.nextInt();
+            int k = sc.nextInt();
+            int[] data = new int[num];//定义一个数组
+            for (int i = 0; i < num; i++) {
+                data[i] = sc.nextInt();//遍历数组放入元素
+            }
+                Arrays.sort(data);//Arrays.sort(int[] a)
+                                //这种形式是对一个数组的所有元素进行排序，并且是按从小到大的顺序。
+            for(int i =0; i<k;i++){
+                if(i!=k-1){
+                    System.out.print(data[i]+" ");
+                }else{
+                    System.out.println(data[i]);//最后一个不要空格
+                }
+            }
+        }
+    }
+}
