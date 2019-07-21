@@ -1,0 +1,32 @@
+/*
+W*H 网格盒子
+0-H1
+0-W1
+每个位置最多放一块蛋糕
+欧几里得距离不能等于2
+（x1，y1）（x2，y2）
+欧几里得距离：{(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)}
+的算术平方根
+求最多放几块蛋糕？
+*/
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int n = sc.nextInt();
+        int result = deal(m,n);
+        System.out.println(result);
+    }
+    public static int deal(int m,int n){
+        int result = 0;
+        if(m%4==0 || n%4 ==0){
+        //如果能整除4 那么蛋糕个数为网格个数的一半
+        result = m*n/2;
+        }else{
+        //不能被4整除 将蛋糕每隔一个空放一个 可以放多少 奇数的一半+1
+        result = m*n/2+1;
+        }
+        return result;
+   }
