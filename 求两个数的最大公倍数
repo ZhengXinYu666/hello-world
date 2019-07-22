@@ -1,0 +1,75 @@
+/*
+正整数A 正整数B
+最小公倍数（能被A和B整除的最小正整数）
+
+方法1    两数相乘法
+两个数互为质数
+
+方法2    找大数法
+两个数有倍数关系
+较大的就是两个数的最小公倍数
+
+方法3    扩大法
+如果两个数不互质，也没有倍数关系
+把两数依次扩大两倍
+
+方法4    两数乘积除以两数的最大公约数法
+
+那么我们来思考一下这个最小公倍数的条件
+A.A、B都大于0
+B.能被A和B整除（n%A==0||n%B==0）return n
+C.
+*/
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()){
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int result = a*b/foo(a,b);
+            System.out.println(result);
+        }
+    }
+    public static int foo(int a, int b){
+        int c = a % b;
+        if (c == 0){
+            return b;
+        }else{
+          return foo(b,c);
+        }
+    }
+}
+
+
+
+
+
+
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        if (a < b){//a<b的时候把ab值交换
+            int temp = a;
+                   a = b;
+                   b = temp;
+        }
+        if (a%b == 0){
+            System.out.println(a);
+        }else{
+            int x = 1;
+            for (int i = 2; i <=a ;i++){
+                if (a%i == 0 && b %i ==0){
+                    if (i>x)
+                        x = i;
+                }
+            }
+            System.out.println(a*b /x);
+        }
+    }
+}
