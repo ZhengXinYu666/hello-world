@@ -1,0 +1,49 @@
+用两个栈实现队列
+/*
+首先看到这个题
+回想一下什么是栈 什么是队列
+
+栈的特性：先进后出
+入栈：先进去的在栈底，后入栈的在栈顶
+出栈：栈顶先出，最后栈底出栈
+
+队列的特性：先进先出
+入队列：先进的在队头，后进的在队尾
+出队列：队头先出，队尾最后
+
+其实用两个栈来实现一个队列
+就是组合两个栈实现队列
+把队列正常入栈，出栈的时候先把栈里的内容按顺序搬到另一个栈
+负负得正，再按顺序出栈的时候
+就变成了入栈前队列的顺序
+*/
+import java.util.*;
+
+public class Solution {
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+
+    //入栈函数
+    public void push(int num){
+        stack1.push(num);    //压栈操作直接用push
+    }
+    //出栈函数
+    public int pop(){
+        Integer re = null;
+        if(!stack2.empty()){//如果栈2不是空的，那么把最上面那个取出来
+            re = stack2.pop();
+        }else{
+            ///如果栈2是空的，就把栈1里的数一个个取出来，放到栈2里
+             while(!stack1.empty()){   
+                re=stack1.pop(); 
+                stack2.push(re); 
+                             } 
+                  //栈2里有数之后，再次把里面的数取出来
+                  if(!stack2.empty()){ 
+                         re=stack2.pop(); 
+                   } 
+       } 
+       return re; 
+    }
+}
+
