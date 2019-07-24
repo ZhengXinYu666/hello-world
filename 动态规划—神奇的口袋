@@ -1,0 +1,52 @@
+/*
+神奇的口袋
+容量：40
+变出的物品总体积必须是40
+现在有n个需求物品
+a1，a2...an
+如果选出的物品的总体积为40，则可以得到这些物品
+求有多少种选择方式
+想到递归 诶~那就对了
+import java.util.*;
+public class Main{
+    static int[] a = new int[100];
+    static int f(int n,int w){
+        if(w==0)        //若让拿的物品总重量为0，则有一种方法就是啥也不拿
+            return 1;
+            if(n<=0)        //如果让拿的物品重量小于等于0就无意义，一种方法也没有
+                return 0;
+                return f(n-1,w)+f(n-1,w-a[n]);
+     }
+    public static void main(String[] args){
+                Scanner sc = new Scanner(System.in);
+                int n = sc.nextInt();
+                for (int i = 1; i <= n; i++){
+                    a[i]= sc.nextInt();
+        }
+        System.out.println(f(n,40));
+    }
+}
+现在用一下动态规划
+*/
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n+1];
+        int[][] dp = new int[n+1][41];//dp[i][j]表示从i种物品中拿出体积j的方法数
+        for(int i = 1;i<=n;i++){
+            a[i] = sc.nextInt();
+			dp[i][0] = 1;//如果让拿的物品总重量为0，则有一种方法，即什么也不拿
+		}
+		dp[0][0] = 1;
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= 40; j++) {
+				dp[i][j] = dp[i - 1][j];
+				if (j >= a[i])
+					dp[i][j] += dp[i - 1][j - a[i]];
+			}
+		}
+		System.out.println(dp[n][40]);
+    }
+}
