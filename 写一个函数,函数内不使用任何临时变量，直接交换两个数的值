@@ -1,0 +1,18 @@
+/*
+   写一个函数
+       要求：A：函数内不使用任何临时变量
+            B：直接交换两个数的值
+       功能：int[]AB 将第零个元素和第一个元素为待交换的值
+           返回交换后的数组
+*/
+import java.util.*;
+
+public class Exchange {
+    public int[] exchangeAB(int[] AB){
+        AB[0]=AB[0]+AB[1];
+        AB[1]=AB[0]-AB[1];
+        AB[0]=AB[0]-AB[1];
+        return AB;
+    }
+}
+
