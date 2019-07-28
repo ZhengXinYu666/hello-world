@@ -1,0 +1,25 @@
+/*
+    设计一个算法完成两个超长正整数的加法
+        设计参数：
+                String addend:加数
+                String augend：被加数
+              返回值：加法结果
+*/
+使用BigInteger()
+import java.util.*;
+import java.math.*;
+
+public class Main {
+public static void main(String[] args){
+    Scanner sc=new Scanner(System.in);
+     while(sc.hasNext()){
+        String a=sc.next();
+        String b=sc.next();
+            BigInteger sum=new BigInteger(a);
+            BigInteger sum1=new BigInteger(b);
+            BigInteger res=sum.add(sum1);
+            System.out.println(res);
+                        }
+    }        
+}
+
