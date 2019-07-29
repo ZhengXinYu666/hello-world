@@ -1,0 +1,40 @@
+/*
+    给定数字0-9各若干个
+    A、可以任意顺序排列这些数字
+    B、必须全部使用
+    C、使得到的数尽可能小（0不可以放到首位）
+    
+    思路：首先我们有好多个数字
+    0-9各若干个
+    尽可能小，而且第一位又不能为0
+    所以 数字最开头就要是现有的数字中除去0以外的最小数
+    比如例子中给出的10015558
+    简单地来说就是把小数往高位放，大数往最后放
+*/
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(sc.nextInt());
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i) != 0) {
+                sb.append(i);
+                list.set(i, list.get(i) - 1);
+                break;
+            }
+        }
+ 
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) != 0) {
+                for (int j = 0; j < list.get(i); j++) {
+                    sb.append(i);
+                }
+            }
+        }
+        System.out.println(sb.toString());
+    }
+}
