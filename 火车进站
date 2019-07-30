@@ -1,0 +1,141 @@
+火车进站
+描述 给定一个正整数N代表火车数量，0<N<10，接下来输入火车入站的序列，一共N辆火车，每辆火车以数字1-9编号。要求以字典序排序输出火车出站的序列号。
+知识点 栈
+运行时间限制 0M
+内存限制 0
+输入 有多组测试用例，每一组第一行输入一个正整数N（0<N<10），第二行包括N个正整数，范围为1到9。
+输出 输出以字典序排序的火车出站序列号，每个编号以空格隔开，每个输出序列换行，具体见sample。
+样例输入 3 1 2 3
+样例输出 1 2 3 1 3 2 2 1 3 2 3 1 3 2 1
+import java.util.*;
+ 
+public class Main
+{
+	private static int[] train;
+	private static int[] result;
+	
+	public static void main(String[] args)
+	{
+		Scanner cin = new Scanner(System.in);
+ 
+		int c = cin.nextInt();
+		train = new int[c+1];
+		
+		for(int i = 1; i <= c; i++)
+		{
+			train[i] = cin.nextInt();
+		}
+		cin.close();
+		sort(c);
+	}
+	
+	public static void sort(int n)
+	{
+		int[] temp = new int[n];
+		
+		for(int i = 0; i < n; i++)
+		{
+			temp[i] = i+1;
+		}
+		int num = 1;
+		for(int i = 1; i <= n;i++)
+		{
+			num *= i;
+		}
+		result = new int[num];
+		for(int i = 0; i < num; i++)
+		{
+			if(isRight(temp))
+			{
+				String number = "";
+				
+				for(int j = 0 ; j < n; j++)
+				{
+					number += train[temp[j]];
+				}
+				result[i] = Integer.parseInt(number);
+			}
+			temp = exec(temp,n);
+		}
+		
+		Arrays.sort(result);
+		
+		Stack<String> r = new Stack<String>();
+		for(int i = result.length-1; i >= 0; i--)
+		{
+			String p = "",rp = "";
+			if(result[i] != 0)
+			{
+				p = Integer.toString(result[i]);
+				int count = p.length();
+				
+				for(int j = 0; j < count; j++)
+				{
+					rp += p.charAt(j);
+					if(j != count-1)
+						rp += " ";
+					else
+						rp += "\n";
+				}
+				r.push(rp);
+			}
+			else
+				break;
+		}
+		while(!r.isEmpty())
+		{
+			System.out.print(r.pop());
+		}
+	}
+	
+	
+	public static int[] exec(int[] temp,int n)
+	{
+		
+		
+		for(int i = n-1; i > 0; i--)
+		{
+			if(temp[i-1] < temp[i])
+			{
+				for(int j = n-1;j > i-1; j--)
+				{
+					if(temp[i-1]<temp[j])
+					{
+						int t = temp[i-1];
+						temp[i-1] = temp[j];
+						temp[j] = t;
+						break;
+					}
+				}
+				int[] tmp = new int[temp.length];
+				tmp = temp.clone();
+				for(int j = i,p = n-1; j < n; j++,p--)
+				{
+					temp[j] = tmp[p];
+				}
+				break;
+			}
+		}
+		return temp;
+	}
+	
+	public static boolean isRight(int[] trains)
+	{
+		for(int i = 0; i < trains.length; i++)
+		{
+			int max = trains[i];
+			for(int j = i + 1; j < trains.length; j++)
+			{
+				if(trains[j] < trains[i])
+				{
+					if(max > trains[j])
+						max = trains[j];
+					else
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+}
+
