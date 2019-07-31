@@ -1,0 +1,20 @@
+/*
+小写英文字母组成的字符串    s
+一个包含较短小写英文的字符串的数组    p
+对于p中的每一个较小的字符串判断其是不是s的子串
+因为contains方法本身就返回一个true或者false，因此直接赋值给bp 布尔数组就行了
+*/
+import java.util.*;
+ 
+public class Substr {
+    public boolean[] chkSubStr(String[] p, int n, String s) {
+        boolean []bp=new boolean[p.length];
+        if(p.length>500||s.length()>1000)	
+            return bp;
+        for(int i=0;i<n;i++){
+            bp[i]=s.contains(p[i]);
+        }
+        return bp;
+    }
+}
+
