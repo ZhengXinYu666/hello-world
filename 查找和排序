@@ -1,0 +1,51 @@
+/*
+查找和排序
+输入任意用户、成绩的薛烈
+可以获得成绩从高到低或者从低到高的排列
+成绩相同时按录入时间先后排列
+*/
+import java.util.*;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        while(sc.hasNext())
+        {
+            int numPeople=sc.nextInt();
+            int option=sc.nextInt();
+              
+            List<Student> stuList=new ArrayList<Student>();
+            for(int i=0;i<numPeople;i++)
+            {
+                stuList.add(new Student(sc.next(), sc.nextInt()));
+            }
+            if(option==0)//降序
+            {
+                stuList.stream().sorted((e1,e2)->{
+                    return e2.score - e1.score;
+                 }).forEach(System.out::println);
+            }
+            else if(option==1)//升序
+            {
+                stuList.stream().sorted((e1,e2)->{
+                    return e1.score - e2.score;
+                }).forEach(System.out::println);
+            }
+        }
+    }
+}
+  
+class Student
+{
+    public String name;
+    public int score;
+    public Student(String name,int score)
+    {
+        this.name=name;
+        this.score=score;
+    }
+    public String toString() {
+        return this.name + " " + this.score;
+    }
+}
