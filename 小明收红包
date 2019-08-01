@@ -1,0 +1,78 @@
+/*
+    某个红包的金额出现次数超过了红包总数的一半
+        ————找到该红包金额
+        并写出算法思路和代码实现
+        首先明确问题
+        某个金额出现的次数超过了红包总数的一半
+        比如888元的红包    领了10个 总共15个红包
+        就是这样的情况
+        我们需要知道红包的总数————红包总数的一半
+        每个红包收到的金额数——存在一个数组中
+        从小到大排序输出相同元素出现的个数
+        然后与红包总数的1/2进行比较
+        
+    注意：数据可能有不存在超过红包一半的——————这个时候就要输出0；
+        即该金额的数目必须 大于 红包数一半，不能小于等于。
+        如果一个数出现次数超过一半了，排序过后，必然排在中间，则最后遍历整个数组查看是否符合即可。
+*/
+public class Gift {
+
+    public int getValue(int[] gifts, int n) {
+        return quickSort(gifts, 0, n - 1);
+    }
+
+    public int quickSort(int[] arr, int low, int high) {
+        int mid = (high + 1) >> 1;
+        int pivot = partition(arr, low, high);
+        while (pivot != mid) {//利用快排找到中位数
+            if (pivot < mid) {
+                pivot = partition(arr, pivot + 1, high);
+            } else {
+                pivot = partition(arr, low, pivot - 1);
+            }
+        }
+        int res = arr[pivot];
+        if (!check(arr, high + 1, res)) {
+            return 0;
+        }
+        return res;
+    }
+
+    public int partition(int arr[], int low, int high) {
+        int left = low;
+        int right = high;
+        int temp = arr[low];
+        while (left < right) {
+            while (left < right && arr[right] >= temp) {
+                --right;
+            }
+            if (left < right) {
+                arr[left] = arr[right];
+            }
+            while (left < right && arr[left] <= temp) {
+                ++left;
+            }
+            if (left < right) {
+                arr[right] = arr[left];
+            }
+        }
+        arr[left] = temp;
+        return left;
+    }
+
+    public boolean check(int[] arr, int n, int res) {
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == res) {
+                ++count;
+            }
+        }
+        if (count * 2 <= n) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+}
+
