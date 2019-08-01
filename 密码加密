@@ -1,0 +1,79 @@
+/*
+    加密办法：
+        对消息原文的每个字母
+            分别用该字幕之后的第五个字幕替换    例如A——F
+            其他字符不变，并且消息原文的所有字母都是大写的
+*/
+
+import java.util.*;
+ 
+public class Main{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        while(sc.hasNext()){
+            char[] sw=new char[130];
+            String str1="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String str2="VWXYZABCDEFGHIJKLMNOPQRSTU";
+            for(int i=0;i<str1.length();i++){
+                sw[str1.charAt(i)]=str2.charAt(i);
+            }
+            String str=sc.nextLine();
+            String result="";
+            for(int i=0;i<str.length();i++){
+                if(str.charAt(i)==' '){
+                    result+=" ";
+                }else{
+                    result+=sw[str.charAt(i)];
+                }
+            }
+            System.out.println(result);
+        }
+    }
+}
+
+/*
+    加密办法：
+        对消息原文的每个字母
+            分别用该字幕之后的第五个字幕替换    例如A——F
+            其他字符不变，并且消息原文的所有字母都是大写的
+*/
+
+import java.util.*;
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            String CHTStr = sc.nextLine();
+            System.out.println(GetClearCode(CHTStr));
+        }
+    }
+ 
+    //HELLO WORLD SNHJ  密文
+    //CZGGJ RJMGY NICE  明文
+    public static String GetClearCode(String str){
+        Map<Character,Character> map = new HashMap<>();
+        List<Character> chr = new ArrayList<>();
+        for (int i = 0; i <26 ; i++) {
+            chr.add((char)(65+i));
+        }
+ 
+        //将密文与明文之间的对应关系保存在一个Map集合里
+        for (int i = 0; i <chr.size() ; i++) {
+            if(i <5){
+                map.put(chr.get(i),(char)(chr.get(i)+21));
+            }else {
+                map.put(chr.get(i),(char)(chr.get(i)-5));
+            }
+        }
+ 
+        char[] ch = str.toCharArray();
+        for (int i = 0; i <ch.length; i++) {
+            if(map.containsKey(ch[i])){
+                ch [i] = map.get(ch [i]);
+            }
+        }
+ 
+        return new String(ch);
+    }
+}
+
