@@ -1,0 +1,60 @@
+import java.util.*;
+/*
+    编写代码
+        给定值x为基准将链表分割为两部分
+        所有的结点排在大于或等于x的结点之前
+       给定一个链表的头指针
+       返回重新排列后的头指针
+       
+       我们可以用两个新链表一个存比基准值大的，另一个存比基准值小的。然后再拼接在一起。
+*/
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Partition {
+    public ListNode partition(ListNode pHead, int x) {
+        // write code here
+        ListNode current = pHead;
+        ListNode node1_head = null;
+        ListNode node1_last = null;
+        ListNode node2_head = null;
+        ListNode node2_last = null;
+        while(current != null){
+            if(current.val < x){
+                if(node1_head == null){
+                    node1_head = new ListNode(current.val);
+                    node1_last = node1_head;
+                }else{
+                    ListNode newNode =  new ListNode(current.val);
+                    node1_last.next = newNode;
+                    node1_last = newNode;
+                    
+                }
+            }else{
+               if(node2_head == null){
+                    node2_head = new ListNode(current.val);
+                    node2_last = node2_head;
+                }else{
+                    ListNode newNode =  new ListNode(current.val);
+                    node2_last.next = newNode;
+                    node2_last = newNode;
+                    
+                }
+            }
+            current = current.next;
+        }
+        if(node1_head == null){
+            return node2_head;
+        }else{
+            node1_last.next = node2_head;
+            return node1_head;
+        }
+        
+    }
+}
